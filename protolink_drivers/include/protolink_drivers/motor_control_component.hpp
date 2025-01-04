@@ -19,7 +19,6 @@
 
 #include <conversion_hardware_communication_msgs__MotorControl.hpp>
 #include <rclcpp/rclcpp.hpp>
-#include <rclcpp_components/register_node_macro.hpp>
 
 namespace protolink_drivers
 {
@@ -32,5 +31,3 @@ public:
 }  // namespace protolink_drivers
 
 #endif  // PROTOLINK_DRIVERS__MOTOR_CONTROL_COMPONENT_HPP_
-
-RCLCPP_COMPONENTS_REGISTER_NODE(protolink_drivers::MotorControlComponent)

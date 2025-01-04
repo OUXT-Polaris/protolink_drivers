@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include <protolink_drivers/motor_control_component.hpp>
+#include <rclcpp_components/register_node_macro.hpp>
 
 namespace protolink_drivers
 {
@@ -21,3 +22,5 @@ MotorControlComponent::MotorControlComponent(const rclcpp::NodeOptions & options
 {
 }
 }  // namespace protolink_drivers
+
+RCLCPP_COMPONENTS_REGISTER_NODE(protolink_drivers::MotorControlComponent)

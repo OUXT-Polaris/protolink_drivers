@@ -1,0 +1,11 @@
+motor_control:
+  ip_address:
+    type: string
+    default_value: "127.0.0.1"
+    description: "IP address of the motor driver."
+  port:
+    type: int
+    default_value: 1000
+    description: "Port of the motor driver."
+    validation:
+      gt<>: 0
