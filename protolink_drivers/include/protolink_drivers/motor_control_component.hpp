@@ -18,6 +18,7 @@
 #include <protolink_drivers/visibility_control.h>
 
 #include <conversion_hardware_communication_msgs__MotorControl.hpp>
+#include <protolink_drivers_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 namespace protolink_drivers
@@ -27,6 +28,10 @@ class MotorControlComponent : public rclcpp::Node
 public:
   PROTOLINK_DRIVERS_PUBLIC
   explicit MotorControlComponent(const rclcpp::NodeOptions & options);
+
+private:
+  // const motor_control::
+  const motor_control::Params params_;
 };
 }  // namespace protolink_drivers
 
