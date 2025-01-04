@@ -33,7 +33,10 @@ public:
 private:
   boost::asio::io_service io_;
   const motor_control::Params params_;
-  const protolink::udp_protocol::Publisher protolink_publisher_;
+  protolink::udp_protocol::Publisher protolink_publisher_;
+  const rclcpp::TimerBase::SharedPtr publish_timer_;
+  std::optional<hardware_communication_msgs::msg::MotorControl> motor_control_command_;
+  rclcpp::Subscription<hardware_communication_msgs::msg::MotorControl>::SharedPtr callback_;
 };
 }  // namespace protolink_drivers
 
