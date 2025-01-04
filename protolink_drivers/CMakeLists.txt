@@ -8,11 +8,15 @@ endif()
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
+add_protolink_message_from_ros_message("hardware_communication_msgs" "MotorControl")
+
+ament_auto_add_library(protolink_drivers SHARED
+  src/motor_control_component.cpp
+)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-add_protolink_message_from_ros_message("hardware_communication_msgs" "MotorControl")
 
 ament_auto_package()
