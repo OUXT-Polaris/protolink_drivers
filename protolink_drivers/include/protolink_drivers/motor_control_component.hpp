@@ -18,6 +18,7 @@
 #include <protolink_drivers/visibility_control.h>
 
 #include <conversion_hardware_communication_msgs__MotorControl.hpp>
+#include <protolink/client.hpp>
 #include <protolink_drivers_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
 
@@ -32,6 +33,7 @@ public:
 private:
   // const motor_control::
   const motor_control::Params params_;
+  const protolink::udp_protocol::Publisher protolink_publisher_;
 };
 }  // namespace protolink_drivers
 

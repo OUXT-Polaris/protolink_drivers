@@ -19,7 +19,8 @@ namespace protolink_drivers
 {
 MotorControlComponent::MotorControlComponent(const rclcpp::NodeOptions & options)
 : Node("motor_control_component", options),
-  params_(motor_control::ParamListener(get_node_parameters_interface()).get_params())
+  params_(motor_control::ParamListener(get_node_parameters_interface()).get_params()),
+  protolink_publisher_(params_.ip_address, params_.port)
 {
 }
 }  // namespace protolink_drivers
