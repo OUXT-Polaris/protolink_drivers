@@ -31,7 +31,7 @@ public:
   explicit MotorControlComponent(const rclcpp::NodeOptions & options);
 
 private:
-  // const motor_control::
+  boost::asio::io_service io_;
   const motor_control::Params params_;
   const protolink::udp_protocol::Publisher protolink_publisher_;
 };

@@ -9,3 +9,15 @@ motor_control:
     description: "Port of the motor driver."
     validation:
       gt<>: 0
+  from_port:
+    type: int
+    default_value: 1000
+    description: "Port of the control PC."
+    validation:
+      gt<>: 0
+  publish_rate:
+    type: double
+    default_value: 60
+    description: publish rate of protolink message
+    validation:
+      gt<>: 0
