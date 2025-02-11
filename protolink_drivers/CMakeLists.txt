@@ -8,6 +8,8 @@ endif()
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
+include(FindProtobuf REQUIRED)
+
 add_protolink_message_from_ros_message("hardware_communication_msgs" "MotorControl")
 
 generate_parameter_library(
@@ -18,7 +20,7 @@ generate_parameter_library(
 ament_auto_add_library(protolink_drivers SHARED
   src/motor_control_component.cpp
 )
-target_link_libraries(protolink_drivers ${PROJECT_NAME}_parameters)
+target_link_libraries(protolink_drivers ${PROJECT_NAME}_parameters ${PROTOBUF_LIBRARY})
 rclcpp_components_register_nodes(protolink_drivers
   "protolink_drivers::MotorControlComponent")
 
