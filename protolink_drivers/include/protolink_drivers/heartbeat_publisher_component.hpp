@@ -12,34 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef PROTOLINK_DRIVERS__MOTOR_CONTROL_COMPONENT_HPP_
-#define PROTOLINK_DRIVERS__MOTOR_CONTROL_COMPONENT_HPP_
+#ifndef PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_COMPONENT_HPP_
+#define PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_COMPONENT_HPP_
 
 #include <protolink_drivers/visibility_control.h>
 
-#include <conversion_hardware_communication_msgs__MotorControl.hpp>
-#include <protolink_drivers/motor_control_parameters.hpp>
+#include <conversion_hardware_communication_msgs__HeartBeat.hpp>
+#include <protolink_drivers/heartbeat_publisher_parameters.hpp>
 #include <protolink/client.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 namespace protolink_drivers
 {
-class MotorControlComponent : public rclcpp::Node
+class HeartBeatPublisherComponent : public rclcpp::Node
 {
 public:
   PROTOLINK_DRIVERS_PUBLIC
-  explicit MotorControlComponent(const rclcpp::NodeOptions & options);
+  explicit HeartBeatPublisherComponent(const rclcpp::NodeOptions & options);
 
 private:
+  hardware_communication_msgs::msg::HeartBeat data_;
   boost::asio::io_service io_;
-  const motor_control::Params params_;
+  const heartbeat_publisher::Params params_;
   protolink::udp_protocol::Publisher<
-    protolink__hardware_communication_msgs__MotorControl::hardware_communication_msgs__MotorControl>
+    protolink__hardware_communication_msgs__HeartBeat::hardware_communication_msgs__HeartBeat>
     protolink_publisher_;
   const rclcpp::TimerBase::SharedPtr publish_timer_;
-  std::optional<hardware_communication_msgs::msg::MotorControl> motor_control_command_;
-  rclcpp::Subscription<hardware_communication_msgs::msg::MotorControl>::SharedPtr callback_;
 };
 }  // namespace protolink_drivers
 
-#endif  // PROTOLINK_DRIVERS__MOTOR_CONTROL_COMPONENT_HPP_
+#endif  // PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_COMPONENT_HPP_
