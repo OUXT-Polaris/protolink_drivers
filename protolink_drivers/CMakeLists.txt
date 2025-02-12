@@ -38,6 +38,11 @@ rclcpp_components_register_nodes(protolink_drivers
 rclcpp_components_register_nodes(protolink_drivers
   "protolink_drivers::HeartBeatPublisherComponent")
 
+  install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()

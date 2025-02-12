@@ -17,7 +17,7 @@ motor_control:
       gt<>: 0
   publish_rate:
     type: double
-    default_value: 60
+    default_value: 60.0
     description: publish rate of protolink message
     validation:
       gt<>: 0
