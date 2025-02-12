@@ -30,6 +30,8 @@ ament_auto_add_library(protolink_drivers SHARED
 target_link_libraries(protolink_drivers 
   motor_control_parameters 
   heartbeat_publisher_parameters
+  hardware_communication_msgs__MotorControl_proto
+  hardware_communication_msgs__HeartBeat_proto
   ${PROTOBUF_LIBRARY})
 
 rclcpp_components_register_nodes(protolink_drivers

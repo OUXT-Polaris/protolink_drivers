@@ -22,7 +22,7 @@ HeartBeatPublisherComponent::HeartBeatPublisherComponent(const rclcpp::NodeOptio
   data_(
     hardware_communication_msgs::build<hardware_communication_msgs::msg::HeartBeat>().sequence(0)),
   params_(heartbeat_publisher::ParamListener(get_node_parameters_interface()).get_params()),
-  protolink_publisher_(io_, "255.255.255.255", params_.port, params_.from_port),
+  protolink_publisher_(io_, params_.ip_address, params_.port, params_.from_port),
   publish_timer_(
     create_wall_timer(std::chrono::duration<double>(1.0 / params_.publish_rate), [&]() {
       protolink_publisher_.send(convert(data_));

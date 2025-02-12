@@ -1,8 +1,12 @@
 heartbeat_publisher:
+  ip_address:
+    type: string
+    default_value: "255.255.255.255"
+    description: "IP address of the emergency stop board."
   port:
     type: int
     default_value: 1000
-    description: "Port of the emergency board."
+    description: "Port of the emergency stop board."
     validation:
       gt<>: 0
   from_port:
