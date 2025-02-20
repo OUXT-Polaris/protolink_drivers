@@ -20,7 +20,7 @@ namespace protolink_drivers
 HeartBeatPublisherComponent::HeartBeatPublisherComponent(const rclcpp::NodeOptions & options)
 : Node("heartbeat_publisher_component", options),
   data_(
-    hardware_communication_msgs::build<hardware_communication_msgs::msg::HeartBeat>().sequence(0)),
+    hardware_communication_msgs::build<hardware_communication_msgs::msg::HeartBeat>().sequence(1)),
   params_(heartbeat_publisher::ParamListener(get_node_parameters_interface()).get_params()),
   protolink_publisher_(io_, params_.ip_address, params_.port, params_.from_port),
   publish_timer_(
