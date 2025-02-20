@@ -18,8 +18,8 @@
 #include <protolink_drivers/visibility_control.h>
 
 #include <conversion_hardware_communication_msgs__MotorControl.hpp>
-#include <protolink_drivers/motor_control_parameters.hpp>
 #include <protolink/client.hpp>
+#include <protolink_drivers/motor_control_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 namespace protolink_drivers

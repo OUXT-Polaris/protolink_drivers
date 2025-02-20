@@ -9,15 +9,16 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>hardware_communication_msgs</depend>
-  <depend>protolink</depend>
-  <depend>rclcpp</depend>
-  <depend>rclcpp_components</depend>
   <depend>generate_parameter_library</depend>
-  <depend>python3-protobuf</depend>
+  <depend>geographic_msgs</depend>
+  <depend>hardware_communication_msgs</depend>
   <depend>libnanopb-dev</depend>
   <depend>protobuf-dev</depend>
   <depend>protobuf</depend>
+  <depend>protolink</depend>
+  <depend>python3-protobuf</depend>
+  <depend>rclcpp_components</depend>
+  <depend>rclcpp</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ouxt_lint_common</test_depend>
