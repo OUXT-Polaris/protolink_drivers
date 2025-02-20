@@ -21,6 +21,13 @@
             <param name="publish_rate" value="60.0"/>
         </composable_node>
 
+        <!-- GPS -->
+        <composable_node pkg="protolink_drivers" plugin="protolink_drivers::GpsDriverComponent" name="driver_node" namespace="protolink/gps">
+            <param name="use_sim_time" value="$(var use_sim_time)"/>
+            <param name="use_intra_process_comms" value="true"/>
+            <param name="port" value="5000"/>
+        </composable_node>
+
         <!-- Heartbeat -->
         <composable_node pkg="protolink_drivers" plugin="protolink_drivers::HeartBeatPublisherComponent" name="driver_node" namespace="protolink/heartbeat">
             <param name="use_sim_time" value="$(var use_sim_time)"/>

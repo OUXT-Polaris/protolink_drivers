@@ -12,33 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_COMPONENT_HPP_
-#define PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_COMPONENT_HPP_
+#ifndef PROTOLINK_DRIVERS__GPS_DRIVER_COMPONENT_HPP_
+#define PROTOLINK_DRIVERS__GPS_DRIVER_COMPONENT_HPP_
 
 #include <protolink_drivers/visibility_control.h>
 
-#include <conversion_hardware_communication_msgs__HeartBeat.hpp>
+#include <conversion_geographic_msgs__GeoPose.hpp>
 #include <protolink/client.hpp>
-#include <protolink_drivers/heartbeat_publisher_parameters.hpp>
+#include <protolink_drivers/gps_driver_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 namespace protolink_drivers
 {
-class HeartBeatPublisherComponent : public rclcpp::Node
+class GpsDriverComponent : public rclcpp::Node
 {
 public:
   PROTOLINK_DRIVERS_PUBLIC
-  explicit HeartBeatPublisherComponent(const rclcpp::NodeOptions & options);
+  explicit GpsDriverComponent(const rclcpp::NodeOptions & options);
 
 private:
-  hardware_communication_msgs::msg::HeartBeat data_;
   boost::asio::io_service io_;
-  const heartbeat_publisher::Params params_;
-  protolink::udp_protocol::Publisher<
-    protolink__hardware_communication_msgs__HeartBeat::hardware_communication_msgs__HeartBeat>
-    protolink_publisher_;
-  const rclcpp::TimerBase::SharedPtr publish_timer_;
+  const gps_driver::Params params_;
+  rclcpp::Publisher<geographic_msgs::msg::GeoPose>::SharedPtr publisher_;
+  protolink::udp_protocol::Subscriber<protolink__geographic_msgs__GeoPose::geographic_msgs__GeoPose>
+    subscriber_;
 };
 }  // namespace protolink_drivers
 
-#endif  // PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_COMPONENT_HPP_
+#endif  // PROTOLINK_DRIVERS__GPS_DRIVER_COMPONENT_HPP_
