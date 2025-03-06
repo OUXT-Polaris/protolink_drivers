@@ -2,16 +2,6 @@
     <arg name="use_sim_time" default="false"/>
     
     <node_container pkg="rclcpp_components" exec="component_container_mt" name="protolink_drivers_container" namespace="protolink" args="">
-        <!-- Heartbeat -->
-        <composable_node pkg="protolink_drivers" plugin="protolink_drivers::HeartBeatPublisherComponent" name="driver_node" namespace="protolink/heartbeat">
-            <param name="use_sim_time" value="$(var use_sim_time)"/>
-            <param name="use_intra_process_comms" value="true"/>
-            <param name="ip_address" value="192.168.0.255"/>
-            <param name="port" value="4000"/>
-            <param name="from_port" value="4000"/>
-            <param name="publish_rate" value="60.0"/>
-        </composable_node>
-
         <!-- Motor Driver -->
         <composable_node pkg="protolink_drivers" plugin="protolink_drivers::MotorControlComponent" name="driver_node" namespace="protolink/motor/left">
             <param name="use_sim_time" value="$(var use_sim_time)"/>
