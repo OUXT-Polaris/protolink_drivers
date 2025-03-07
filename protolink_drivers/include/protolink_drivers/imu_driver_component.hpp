@@ -22,23 +22,22 @@
 #include <protolink_drivers/imu_driver_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
 
-namespace protolink_drivers {
-class ImuDriverComponent : public rclcpp::Node {
+namespace protolink_drivers
+{
+class ImuDriverComponent : public rclcpp::Node
+{
 public:
   PROTOLINK_DRIVERS_PUBLIC
-  explicit ImuDriverComponent(const rclcpp::NodeOptions &options);
+  explicit ImuDriverComponent(const rclcpp::NodeOptions & options);
 
 private:
   boost::asio::io_service io_;
   const imu_driver::Params params_;
-  rclcpp::Publisher<hardware_communication_msgs__SimpleImu::
-                        hardware_communication_msgs__SimpleImu>::SharedPtr
-      publisher_;
+  rclcpp::Publisher<hardware_communication_msgs::msg::SimpleImu>::SharedPtr publisher_;
   protolink::udp_protocol::Subscriber<
-      protolink__hardware_communication_msgs__SimpleImu::
-          hardware_communication_msgs__SimpleImu>
-      subscriber_;
+    protolink__hardware_communication_msgs__SimpleImu::hardware_communication_msgs__SimpleImu>
+    subscriber_;
 };
-} // namespace protolink_drivers
+}  // namespace protolink_drivers
 
-#endif // PROTOLINK_DRIVERS__GPS_DRIVER_COMPONENT_HPP_
+#endif  // PROTOLINK_DRIVERS__GPS_DRIVER_COMPONENT_HPP_
