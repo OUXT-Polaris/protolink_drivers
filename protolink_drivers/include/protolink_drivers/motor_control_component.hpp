@@ -22,24 +22,25 @@
 #include <protolink_drivers/motor_control_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
 
-namespace protolink_drivers
-{
-class MotorControlComponent : public rclcpp::Node
-{
+namespace protolink_drivers {
+class MotorControlComponent : public rclcpp::Node {
 public:
   PROTOLINK_DRIVERS_PUBLIC
-  explicit MotorControlComponent(const rclcpp::NodeOptions & options);
+  explicit MotorControlComponent(const rclcpp::NodeOptions &options);
 
 private:
   boost::asio::io_service io_;
   const motor_control::Params params_;
   protolink::udp_protocol::Publisher<
-    protolink__hardware_communication_msgs__MotorControl::hardware_communication_msgs__MotorControl>
-    protolink_publisher_;
+      protolink__hardware_communication_msgs__MotorControl::
+          hardware_communication_msgs__MotorControl>
+      protolink_publisher_;
   const rclcpp::TimerBase::SharedPtr publish_timer_;
-  std::optional<hardware_communication_msgs::msg::MotorControl> motor_control_command_;
-  rclcpp::Subscription<hardware_communication_msgs::msg::MotorControl>::SharedPtr callback_;
+  std::optional<hardware_communication_msgs::msg::MotorControl>
+      motor_control_command_;
+  rclcpp::Subscription<
+      hardware_communication_msgs::msg::MotorControl>::SharedPtr callback_;
 };
-}  // namespace protolink_drivers
+} // namespace protolink_drivers
 
-#endif  // PROTOLINK_DRIVERS__MOTOR_CONTROL_COMPONENT_HPP_
+#endif // PROTOLINK_DRIVERS__MOTOR_CONTROL_COMPONENT_HPP_

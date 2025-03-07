@@ -12,6 +12,7 @@ ament_auto_find_build_dependencies()
 set(msg_files
   "msg/MotorControl.msg"
   "msg/HeartBeat.msg"
+  "msg/SimpleImu.msg"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
