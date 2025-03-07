@@ -48,6 +48,7 @@ target_link_libraries(protolink_drivers
   imu_driver_parameters
   hardware_communication_msgs__MotorControl_proto
   hardware_communication_msgs__HeartBeat_proto
+  hardware_communication_msgs__SimpleImu_proto
   geographic_msgs__GeoPose_proto
   ${PROTOBUF_LIBRARY})
 
