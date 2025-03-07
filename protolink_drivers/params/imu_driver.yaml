@@ -1,0 +1,7 @@
+imu_driver:
+  port:
+    type: int
+    default_value: 1000
+    description: "Port of the control PC."
+    validation:
+      gt<>: 0

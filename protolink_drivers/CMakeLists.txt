@@ -12,6 +12,7 @@ include(FindProtobuf REQUIRED)
 
 add_protolink_message_from_ros_message("hardware_communication_msgs" "MotorControl")
 add_protolink_message_from_ros_message("hardware_communication_msgs" "HeartBeat")
+add_protolink_message_from_ros_message("hardware_communication_msgs" "SimpleImu")
 add_protolink_message_from_ros_message("geographic_msgs" "GeoPose")
 
 generate_parameter_library(
@@ -29,15 +30,22 @@ generate_parameter_library(
   params/gps_driver.yaml
 )
 
+generate_parameter_library(
+  imu_driver_parameters
+  params/imu_driver.yaml
+)
+
 ament_auto_add_library(protolink_drivers SHARED
   src/gps_driver_component.cpp
+  src/imu_driver_component.cpp
   src/heartbeat_publisher_component.cpp
   src/motor_control_component.cpp
 )
-target_link_libraries(protolink_drivers 
-  motor_control_parameters 
+target_link_libraries(protolink_drivers
+  motor_control_parameters
   heartbeat_publisher_parameters
   gps_driver_parameters
+  imu_driver_parameters
   hardware_communication_msgs__MotorControl_proto
   hardware_communication_msgs__HeartBeat_proto
   geographic_msgs__GeoPose_proto
@@ -51,6 +59,9 @@ rclcpp_components_register_nodes(protolink_drivers
 
 rclcpp_components_register_nodes(protolink_drivers
   "protolink_drivers::GpsDriverComponent")
+
+rclcpp_components_register_nodes(protolink_drivers
+  "protolink_drivers::ImuDriverComponent")
 
 install(DIRECTORY
   launch
