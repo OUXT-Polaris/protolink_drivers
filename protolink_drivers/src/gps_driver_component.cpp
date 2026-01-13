@@ -20,9 +20,24 @@ namespace protolink_drivers
 GpsDriverComponent::GpsDriverComponent(const rclcpp::NodeOptions & options)
 : Node("gps_driver_component", options),
   params_(gps_driver::ParamListener(get_node_parameters_interface()).get_params()),
-  publisher_(create_publisher<geographic_msgs::msg::GeoPose>("geopose", 1)),
-  subscriber_(io_, params_.port, [this](const auto & msg) { publisher_->publish(convert(msg)); })
+  publisher_(create_publisher<geographic_msgs::msg::GeoPose>("geopose", 1))
 {
+  int port = params_.port;
+
+  try {
+    sock_ = protolink::udp_protocol::create_socket(io_context_, port);
+    RCLCPP_INFO(this->get_logger(), "UDP open port: %d", port);
+  } catch (const std::exception & e) {
+    RCLCPP_ERROR(this->get_logger(), "Failed to initialize udp publisher: %s", e.what());
+    RCLCPP_ERROR(this->get_logger(), "UDP don't open port %d", port);
+    exit(1);
+  }
+
+  subscriber_ = std::make_shared<protolink::udp_protocol::Subscriber<
+    protolink__geographic_msgs__GeoPose::geographic_msgs__GeoPose>>(
+    sock_, [this](const auto & msg) {
+      publisher_->publish(protolink__geographic_msgs__GeoPose::convert(msg));
+    });
 }
 }  // namespace protolink_drivers
 

@@ -17,7 +17,7 @@
 
 #include <protolink_drivers/visibility_control.h>
 
-#include <conversion_hardware_communication_msgs__SimpleImu.hpp>
+#include <proto_files/conversion_hardware_communication_msgs__SimpleImu.hpp>
 #include <protolink/client.hpp>
 #include <protolink_drivers/imu_driver_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -31,8 +31,9 @@ public:
   explicit ImuDriverComponent(const rclcpp::NodeOptions & options);
 
 private:
-  boost::asio::io_service io_;
   const imu_driver::Params params_;
+  protolink::IoContext io_context_;
+  std::shared_ptr<protolink::udp_protocol::soket> sock_;
   rclcpp::Publisher<hardware_communication_msgs::msg::SimpleImu>::SharedPtr publisher_;
   protolink::udp_protocol::Subscriber<
     protolink__hardware_communication_msgs__SimpleImu::hardware_communication_msgs__SimpleImu>

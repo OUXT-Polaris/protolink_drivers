@@ -22,10 +22,11 @@ HeartBeatPublisherComponent::HeartBeatPublisherComponent(const rclcpp::NodeOptio
   data_(
     hardware_communication_msgs::build<hardware_communication_msgs::msg::HeartBeat>().sequence(1)),
   params_(heartbeat_publisher::ParamListener(get_node_parameters_interface()).get_params()),
-  protolink_publisher_(io_, params_.ip_address, params_.port, params_.from_port),
+  sock_(protolink::udp_protocol::create_socket(io_context_, params_.from_port)),
+  protolink_publisher_(sock_, params_.ip_address, params_.port, this->get_logger()),
   publish_timer_(
     create_wall_timer(std::chrono::duration<double>(1.0 / params_.publish_rate), [&]() {
-      protolink_publisher_.send(convert(data_));
+      protolink_publisher_.send(protolink__hardware_communication_msgs__HeartBeat::convert(data_));
       data_.sequence = data_.sequence + 1;
     }))
 {

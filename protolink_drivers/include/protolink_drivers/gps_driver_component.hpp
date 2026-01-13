@@ -17,7 +17,7 @@
 
 #include <protolink_drivers/visibility_control.h>
 
-#include <conversion_geographic_msgs__GeoPose.hpp>
+#include <proto_files/conversion_geographic_msgs__GeoPose.hpp>
 #include <protolink/client.hpp>
 #include <protolink_drivers/gps_driver_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -31,10 +31,12 @@ public:
   explicit GpsDriverComponent(const rclcpp::NodeOptions & options);
 
 private:
-  boost::asio::io_service io_;
+  protolink::IoContext io_context_;
+  std::shared_ptr<protolink::udp_protocol::soket> sock_;
   const gps_driver::Params params_;
   rclcpp::Publisher<geographic_msgs::msg::GeoPose>::SharedPtr publisher_;
-  protolink::udp_protocol::Subscriber<protolink__geographic_msgs__GeoPose::geographic_msgs__GeoPose>
+  std::shared_ptr<protolink::udp_protocol::Subscriber<
+    protolink__geographic_msgs__GeoPose::geographic_msgs__GeoPose>>
     subscriber_;
 };
 }  // namespace protolink_drivers

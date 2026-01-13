@@ -20,8 +20,11 @@ namespace protolink_drivers
 ImuDriverComponent::ImuDriverComponent(const rclcpp::NodeOptions & options)
 : Node("imu_driver_component", options),
   params_(imu_driver::ParamListener(get_node_parameters_interface()).get_params()),
+  sock_(protolink::udp_protocol::create_socket(io_context_, params_.port)),
   publisher_(create_publisher<hardware_communication_msgs::msg::SimpleImu>("imu", 1)),
-  subscriber_(io_, params_.port, [this](const auto & msg) { publisher_->publish(convert(msg)); })
+  subscriber_(sock_, [this](const auto & msg) {
+    publisher_->publish(protolink__hardware_communication_msgs__SimpleImu::convert(msg));
+  })
 {
 }
 }  // namespace protolink_drivers
