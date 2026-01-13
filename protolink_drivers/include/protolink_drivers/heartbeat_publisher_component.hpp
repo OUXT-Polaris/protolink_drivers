@@ -17,7 +17,7 @@
 
 #include <protolink_drivers/visibility_control.h>
 
-#include <conversion_hardware_communication_msgs__HeartBeat.hpp>
+#include <proto_files/conversion_hardware_communication_msgs__HeartBeat.hpp>
 #include <protolink/client.hpp>
 #include <protolink_drivers/heartbeat_publisher_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -32,8 +32,9 @@ public:
 
 private:
   hardware_communication_msgs::msg::HeartBeat data_;
-  boost::asio::io_service io_;
   const heartbeat_publisher::Params params_;
+  protolink::IoContext io_context_;
+  std::shared_ptr<protolink::udp_protocol::soket> sock_;
   protolink::udp_protocol::Publisher<
     protolink__hardware_communication_msgs__HeartBeat::hardware_communication_msgs__HeartBeat>
     protolink_publisher_;

@@ -17,7 +17,7 @@
 
 #include <protolink_drivers/visibility_control.h>
 
-#include <conversion_hardware_communication_msgs__MotorControl.hpp>
+#include <proto_files/conversion_hardware_communication_msgs__MotorControl.hpp>
 #include <protolink/client.hpp>
 #include <protolink_drivers/motor_control_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -31,8 +31,9 @@ public:
   explicit MotorControlComponent(const rclcpp::NodeOptions & options);
 
 private:
-  boost::asio::io_service io_;
   const motor_control::Params params_;
+  protolink::IoContext io_context_;
+  std::shared_ptr<protolink::udp_protocol::soket> sock_;
   protolink::udp_protocol::Publisher<
     protolink__hardware_communication_msgs__MotorControl::hardware_communication_msgs__MotorControl>
     protolink_publisher_;

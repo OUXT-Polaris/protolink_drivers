@@ -20,12 +20,14 @@ namespace protolink_drivers
 MotorControlComponent::MotorControlComponent(const rclcpp::NodeOptions & options)
 : Node("motor_control_component", options),
   params_(motor_control::ParamListener(get_node_parameters_interface()).get_params()),
-  protolink_publisher_(io_, params_.ip_address, params_.port, params_.from_port),
+  sock_(protolink::udp_protocol::create_socket(io_context_, params_.from_port)),
+  protolink_publisher_(sock_, params_.ip_address, params_.port, this->get_logger()),
   publish_timer_(create_wall_timer(
     std::chrono::duration<double>(1.0 / params_.publish_rate),
     [&]() {
       if (motor_control_command_) {
-        protolink_publisher_.send(convert(motor_control_command_.value()));
+        protolink_publisher_.send(protolink__hardware_communication_msgs__MotorControl::convert(
+          motor_control_command_.value()));
       }
     })),
   callback_(create_subscription<hardware_communication_msgs::msg::MotorControl>(
