@@ -21,21 +21,88 @@
             <param name="publish_rate" value="60.0"/>
         </composable_node> -->
 
-        <!-- IMU -->
+        <!-- IMU >
         <composable_node pkg="protolink_drivers" plugin="protolink_drivers::ImuDriverComponent" name="driver_node" namespace="protolink/imu">
             <param name="use_sim_time" value="$(var use_sim_time)"/>
             <param name="use_intra_process_comms" value="true"/>
             <param name="port" value="5001"/>
         </composable_node>
 
+    </node_container-->
+
+            <!--Motor driver(version2)-->
+    <node_container pkg="rclcpp_components" exec="component_container_mt" name="protolink_drivers_container" namespace="protolink" args="">
+
+        <composable_node pkg="protolink_drivers" plugin="protolink_drivers::RcToMotorControl" name="rc_converter">
+            <param name="use_sim_time" value="$(var use_sim_time)"/>
+            <param name="use_intra_process_comms" value="true"/>
+            
+            <param name="channel_switch" value="4"/>       
+            <param name="channel_manual_left" value="0"/>  
+            <param name="channel_manual_right" value="2"/> 
+            <param name="channel_auto_left" value="5"/>    
+            <param name="channel_auto_right" value="6"/>
+            
+            <remap from="mavros/rc/in" to="/mavros/rc/in"/>
+            <remap from="manual/left/command" to="/protolink/manual/left/command"/>
+            <remap from="manual/right/command" to="/protolink/manual/right/command"/>
+            <remap from="auto/left/command" to="/protolink/auto/left/command"/>
+            <remap from="auto/right/command" to="/protolink/auto/right/command"/>
+        </composable_node>
+
+        <composable_node pkg="protolink_drivers" plugin="protolink_drivers::MotorControlComponent" name="driver_manual_left" namespace="protolink/motor/left/manual">
+            <param name="use_sim_time" value="$(var use_sim_time)"/>
+            <param name="use_intra_process_comms" value="true"/>
+            <param name="ip_address" value="192.168.0.102"/>
+            <param name="port" value="8888"/> <param name="from_port" value="2001"/>
+            <param name="publish_rate" value="60.0"/>
+            <remap from="command" to="/protolink/manual/left/command"/>
+        </composable_node>
+
+        <composable_node pkg="protolink_drivers" plugin="protolink_drivers::MotorControlComponent" name="driver_manual_right" namespace="protolink/motor/right/manual">
+            <param name="use_sim_time" value="$(var use_sim_time)"/>
+            <param name="use_intra_process_comms" value="true"/>
+            <param name="ip_address" value="192.168.0.101"/>
+            <param name="port" value="8888"/> <param name="from_port" value="2002"/>
+            <param name="publish_rate" value="60.0"/>
+            <remap from="command" to="/protolink/manual/right/command"/>
+        </composable_node>
+
+        <composable_node pkg="protolink_drivers" plugin="protolink_drivers::MotorControlComponent" name="driver_auto_left" namespace="protolink/motor/left/auto">
+            <param name="use_sim_time" value="$(var use_sim_time)"/>
+            <param name="use_intra_process_comms" value="true"/>
+            <param name="ip_address" value="192.168.0.102"/>
+            <param name="port" value="8889"/> <param name="from_port" value="3001"/>
+            <param name="publish_rate" value="60.0"/>
+            <remap from="command" to="/protolink/auto/left/command"/>
+        </composable_node>
+
+        <composable_node pkg="protolink_drivers" plugin="protolink_drivers::MotorControlComponent" name="driver_auto_right" namespace="protolink/motor/right/auto">
+            <param name="use_sim_time" value="$(var use_sim_time)"/>
+            <param name="use_intra_process_comms" value="true"/>
+            <param name="ip_address" value="192.168.0.101"/>
+            <param name="port" value="8889"/> <param name="from_port" value="3002"/>
+            <param name="publish_rate" value="60.0"/>
+            <remap from="command" to="/protolink/auto/right/command"/>
+        </composable_node>
+
+        <composable_node pkg="protolink_drivers" plugin="protolink_drivers::HeartBeatPublisherComponent" name="heartbeat_node" namespace="protolink/heartbeat">
+            <param name="use_sim_time" value="$(var use_sim_time)"/>
+            <param name="use_intra_process_comms" value="true"/>
+            <param name="ip_address" value="192.168.0.255"/>
+            <param name="port" value="4000"/>
+            <param name="from_port" value="4000"/>
+            <param name="publish_rate" value="60.0"/>
+        </composable_node>
+
     </node_container>
 
-    <node_container pkg="rclcpp_components" exec="component_container_mt" name="protolink_drivers_container" namespace="protolink/gps" args="">
-        <!-- GPS -->
+    <!--node_container pkg="rclcpp_components" exec="component_container_mt" name="protolink_drivers_container" namespace="protolink/gps" args="">
+        <!--GPS-->
         <composable_node pkg="protolink_drivers" plugin="protolink_drivers::GpsDriverComponent" name="driver_node" namespace="protolink/gps">
             <param name="use_sim_time" value="$(var use_sim_time)"/>
             <param name="use_intra_process_comms" value="true"/>
             <param name="port" value="5000"/>
         </composable_node>
-    </node_container>
+    </node_container-->
 </launch>
