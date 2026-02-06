@@ -54,6 +54,7 @@ target_link_libraries(protolink_drivers
   heartbeat_publisher_parameters
   gps_driver_parameters
   imu_driver_parameters
+  hardware_communication_msgs__GroundStationHeartBeat_proto
   hardware_communication_msgs__MotorControl_proto
   hardware_communication_msgs__HeartBeat_proto
   hardware_communication_msgs__SimpleImu_proto
