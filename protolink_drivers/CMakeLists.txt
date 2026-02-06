@@ -64,6 +64,9 @@ rclcpp_components_register_nodes(protolink_drivers
 rclcpp_components_register_nodes(protolink_drivers
   "protolink_drivers::ImuDriverComponent")
 
+rclcpp_components_register_nodes(protolink_drivers
+  "protolink_drivers::RcToMotorControl")
+
 install(DIRECTORY
   launch
   DESTINATION share/${PROJECT_NAME}/
