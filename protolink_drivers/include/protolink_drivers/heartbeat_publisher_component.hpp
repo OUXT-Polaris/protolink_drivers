@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_COMPONENT_HPP_
+#ifndef PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_GroundStationCOMPONENT_HPP_
 #define PROTOLINK_DRIVERS__HEARTBEAT_PUBLISHER_COMPONENT_HPP_
 
 #include <protolink_drivers/visibility_control.h>
@@ -31,12 +31,19 @@ public:
   explicit HeartBeatPublisherComponent(const rclcpp::NodeOptions & options);
 
 private:
-  hardware_communication_msgs::msg::HeartBeat data_;
+  hardware_communication_msgs::msg::GroundStationHeartBeat data;
+  
+  rclcpp::Subscription<mavros_msgs::msg::RCIn>::SharedPtr rcin_sub;
+  
+  void rcInCallback(const mavros_msgs::msg::RCIn::SharedPtr msg);
+
+private:
+  hardware_communication_msgs::msg::GroundStationHeartBeat data_;
   const heartbeat_publisher::Params params_;
   protolink::IoContext io_context_;
   std::shared_ptr<protolink::udp_protocol::soket> sock_;
   protolink::udp_protocol::Publisher<
-    protolink__hardware_communication_msgs__HeartBeat::hardware_communication_msgs__HeartBeat>
+    protolink__hardware_communication_msgs__GroundStationHeartBeat::hardware_communication_msgs__GroundStationHeartBeat>
     protolink_publisher_;
   const rclcpp::TimerBase::SharedPtr publish_timer_;
 };
