@@ -6,10 +6,12 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake_auto REQUIRED)
+find_package(mavros_msgs REQUIRED)
 ament_auto_find_build_dependencies()
 
 include(FindProtobuf REQUIRED)
 
+add_protolink_message_from_ros_message("hardware_communication_msgs" "GroundStationHeartBeat")
 add_protolink_message_from_ros_message("hardware_communication_msgs" "MotorControl")
 add_protolink_message_from_ros_message("hardware_communication_msgs" "HeartBeat")
 add_protolink_message_from_ros_message("hardware_communication_msgs" "SimpleImu")
@@ -40,7 +42,13 @@ ament_auto_add_library(protolink_drivers SHARED
   src/imu_driver_component.cpp
   src/heartbeat_publisher_component.cpp
   src/motor_control_component.cpp
+  src/rc_to_motor_control.cpp
 )
+
+ament_target_dependencies(protolink_drivers
+  mavros_msgs
+)
+
 target_link_libraries(protolink_drivers
   motor_control_parameters
   heartbeat_publisher_parameters
