@@ -19,6 +19,7 @@
   <depend>python3-protobuf</depend>
   <depend>rclcpp_components</depend>
   <depend>rclcpp</depend>
+  <depend>mavros_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ouxt_lint_common</test_depend>
