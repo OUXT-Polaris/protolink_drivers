@@ -55,7 +55,7 @@
             <param name="use_intra_process_comms" value="true"/>
             <param name="ip_address" value="192.168.0.102"/>
             <param name="port" value="8888"/> <param name="from_port" value="2001"/>
-            <param name="publish_rate" value="60.0"/>
+            <param name="publish_rate" value="30.0"/>
             <remap from="command" to="/protolink/manual/left/command"/>
         </composable_node>
 
@@ -64,7 +64,7 @@
             <param name="use_intra_process_comms" value="true"/>
             <param name="ip_address" value="192.168.0.101"/>
             <param name="port" value="8888"/> <param name="from_port" value="2002"/>
-            <param name="publish_rate" value="60.0"/>
+            <param name="publish_rate" value="30.0"/>
             <remap from="command" to="/protolink/manual/right/command"/>
         </composable_node>
 
@@ -73,7 +73,7 @@
             <param name="use_intra_process_comms" value="true"/>
             <param name="ip_address" value="192.168.0.102"/>
             <param name="port" value="8889"/> <param name="from_port" value="3001"/>
-            <param name="publish_rate" value="60.0"/>
+            <param name="publish_rate" value="30.0"/>
             <remap from="command" to="/protolink/auto/left/command"/>
         </composable_node>
 
@@ -82,7 +82,7 @@
             <param name="use_intra_process_comms" value="true"/>
             <param name="ip_address" value="192.168.0.101"/>
             <param name="port" value="8889"/> <param name="from_port" value="3002"/>
-            <param name="publish_rate" value="60.0"/>
+            <param name="publish_rate" value="30.0"/>
             <remap from="command" to="/protolink/auto/right/command"/>
         </composable_node>
 
