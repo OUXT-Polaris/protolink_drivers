@@ -13,6 +13,7 @@ set(msg_files
   "msg/MotorControl.msg"
   "msg/HeartBeat.msg"
   "msg/SimpleImu.msg"
+  "msg/GroundStationHeartBeat.msg"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
