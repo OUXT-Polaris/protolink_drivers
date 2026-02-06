@@ -13,18 +13,18 @@ RcToMotorControl::RcToMotorControl(const rclcpp::NodeOptions & options)
   ch_auto_left_ = declare_parameter<int>("channel_auto_left", 5);    // Ch6 (Auto指令用)
   ch_auto_right_= declare_parameter<int>("channel_auto_right", 6);   // Ch7 (Auto指令用)
 
+auto qos = rclcpp::QoS(rclcpp::KeepLast(1));//.best_effort().durability_volatile();
+qos.reliable();
+qos.durability_volatile();
+
   // --- パブリッシャー作成 ---
   // 手動ドライバ (8888) へ
-  pub_man_left_  = create_publisher<hardware_communication_msgs::msg::MotorControl>("manual/left/command", 1);
-  pub_man_right_ = create_publisher<hardware_communication_msgs::msg::MotorControl>("manual/right/command", 1);
+  pub_man_left_  = create_publisher<hardware_communication_msgs::msg::MotorControl>("manual/left/command", qos);
+  pub_man_right_ = create_publisher<hardware_communication_msgs::msg::MotorControl>("manual/right/command", qos);
   
   // 自動ドライバ (8889) へ
-  pub_auto_left_  = create_publisher<hardware_communication_msgs::msg::MotorControl>("auto/left/command", 1);
-  pub_auto_right_ = create_publisher<hardware_communication_msgs::msg::MotorControl>("auto/right/command", 1);
-
-  auto qos = rclcpp::QoS(rclcpp::KeepLast(1))
-              .best_effort()
-              .durability_volatile();
+  pub_auto_left_  = create_publisher<hardware_communication_msgs::msg::MotorControl>("auto/left/command", qos);
+  pub_auto_right_ = create_publisher<hardware_communication_msgs::msg::MotorControl>("auto/right/command", qos);
   // --- サブスクライバー ---
   sub_rc_ = create_subscription<mavros_msgs::msg::RCOut>(
     "mavros/rc/out", //rclcpp::SensorDataQoS(),
