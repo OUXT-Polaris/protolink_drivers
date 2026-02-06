@@ -17,10 +17,12 @@
 
 #include <protolink_drivers/visibility_control.h>
 
-#include <proto_files/conversion_hardware_communication_msgs__HeartBeat.hpp>
+#include <proto_files/conversion_hardware_communication_msgs__GroundStationHeartBeat.hpp>
 #include <protolink/client.hpp>
 #include <protolink_drivers/heartbeat_publisher_parameters.hpp>
 #include <rclcpp/rclcpp.hpp>
+#include <hardware_communication_msgs/msg/ground_station_heart_beat.hpp>
+#include <mavros_msgs/msg/rc_in.hpp>
 
 namespace protolink_drivers
 {
